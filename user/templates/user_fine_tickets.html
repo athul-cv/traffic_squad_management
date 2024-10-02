@@ -1,0 +1,162 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Provision Details | Driver</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+    <!--Top navigation bar includes goes here-->
+    {% include 'includes/topNav.html' %}
+
+
+    <!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+    <!-- Left sidebar navigation start here =============================================-->
+    <div class="leftsidebar overlay-scrollbar scrollbar-hover">
+        <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+            <!--Left sidebar navigation items-->
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_dashboard' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_pending_fine' lic %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <span>Driver's Pending Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_paid_fine' lic %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <span>Driver's Paid Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_fine_tickets' lic %}" class="leftsidebar-nav-link active">
+                    <div>
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span>Provision Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_report' lic %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span>Report an Issue</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_profile' lic %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_profile_details' lic %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_logout' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span>Logout</span>
+                </a>
+            </li>
+            <!--Left sidebar navigation items-->
+        </ul>
+    </div>
+    <!-- Left sidebar navigation end here ============================================-->
+
+
+    <!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+    <!-- Dashboard main content start here =================================================-->
+    <div class="dashwrapper">
+            <div class="container-fluid">
+                <h1 class="mt-4">Provision Details</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Provision Details</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i> You can sort data here
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <!--Fine tickets table includes goes here-->
+                            <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+			<th>Fine ID</th>
+            <th>Section of Act</th>
+            <th>Provision</th>
+            <th>Fine Amount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+{% for f in fines %}
+		<tr>
+		<td>{{ f.id }}</td>
+	    <td>{{ f.section_of_act }}</td>
+		<td>{{ f.provision }}</td>
+		<td>{{ f.fine_amount }}</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- Dashboard main content end here ========================================-->
+
+
+    <!--Javascripts includes goes here-->
+    {% include 'includes/footer.html' %}
+
+    <!-- import script -->
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/DataTables/01_Driver_ProvisionTickets.js"></script>
+
+
+</body>
+
+</html>
+<?php
+}else{ 
+	header("Location: login.php");
+	exit();
+}
+?>
+

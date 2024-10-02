@@ -1,0 +1,179 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard | Traffic Police Officer</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+    <!--Top navigation bar includes goes here-->
+    {% include 'includes/topNav.html' %}
+
+
+    <!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+    <!-- Left sidebar navigation start here =============================================-->
+    <div class="leftsidebar overlay-scrollbar scrollbar-hover">
+        <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+            <!--Left sidebar navigation items-->
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_dashboard' pid %}" class="leftsidebar-nav-link active">
+                    <div>
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'add_new_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <span>Add New Fine</span>
+                </a>
+            </li>
+
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'check_revenue_license' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span>Revenue License</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'view_reported_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>View Reported Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_profile' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'profile_details' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'user_reported_issues' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span>Reported Issues</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'tpo_logout' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>Logout</span>
+                </a>
+            </li>
+            <!--Left sidebar navigation items-->
+        </ul>
+    </div>
+    <!-- Left sidebar navigation end here ========================================-->
+
+
+    <!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+    <!-- Dashboard main content start here =================================================-->
+    <div class="dashwrapper animated fadeIn">
+        <div class="container-fluid">
+            <h6 class="mt-1 badge badge-pill badge-light tag-hover" style="padding: 10px; font-size: 0.75rem;">Police Officer ID : <a href="{% url 'police_profile' pid %}">{{pid}}</a></h6>
+            <div class="row">
+                <div class="col-12 p-3 d-lg-none d-md-block d-sm-block">
+                    <a class="btn btn-secondary btn-lg btn-block" href="add_new_fine.php"><span><i style="font-size: 2rem;" class="fas fa-plus-circle"></i> <br>Add New Fine</span></a>
+                </div>
+                <div class="col-12 p-3 d-lg-none d-md-block d-sm-block">
+                    <a class="btn btn-secondary btn-lg btn-block"  href="driver_past_fine.php"><span><i style="font-size: 2rem;" class="fas fa-history"></i> <br>View driver's Past Fine</span></a>
+                </div>
+                <div class="col-12 p-3 d-lg-none d-md-block d-sm-block">
+                    <a class="btn btn-secondary btn-lg btn-block"  href="check_revenue_license.php"><span><i style="font-size: 2rem;" class="fas fa-file-invoice"></i> <br>Check Revenue License</span></a>
+                </div>
+            </div>    
+            <!--Main four count boxes start here-->
+            <div class="row p-2">
+                <!--First count box start-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 animated fadeIn">
+                    <div data-toggle="tooltip" data-placement="bottom" data-title="Reported fine count by you" class="dashcounter color-one p-4 box-hover">
+                        <p>
+                            <i class="fas fa-flag-checkered"></i>
+                        </p>
+
+                        <p class="dashcount-name">Reported Fine Count</p>
+                    </div>
+                </div>
+                <!--First count box end-->
+                <!--Second count box start-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 animated fadeIn">
+                    <div data-toggle="tooltip" data-placement="bottom" data-title="Reported fine amount by you" class="dashcounter color-two p-4 box-hover">
+                        <p>
+                            <i class="fas fa-coins"></i>
+                        </p>
+
+                        <p class="dashcount-name">Reported Fine Amount (LKR)</p>
+                    </div>
+                </div>
+                <!--Second count box end-->
+                <!--Third count box start-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 animated fadeIn">
+                    <div data-toggle="tooltip" data-placement="bottom" data-title="Your police station" class="dashcounter color-four p-4 box-hover">
+                        <p>
+                            <i class="fas fa-warehouse"></i>
+                        </p>
+                        <h3></h3>
+                        <p class="dashcount-name">Police Station</p>
+                    </div>
+                </div>
+                <!--Third count box end-->
+                <!--Fourth count box start-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 animated fadeIn">
+                    <div data-toggle="tooltip" data-placement="bottom" data-title="Your court" class="dashcounter color-three p-4 box-hover">
+                        <p>
+                            <i class="fas fa-balance-scale"></i>
+                        </p>
+                        <h3></h3>
+                        <p class="dashcount-name">Court</p>
+                    </div>
+                </div>
+                <!--Fourth count box end-->
+            </div>
+            <!--Main four count boxes end here-->
+        </div>
+    </div>
+    <!-- Dashboard main content end here ========================================-->
+
+
+    <!--Javascripts includes goes here-->
+     {% include 'includes/footer.html' %}
+
+    <script type="text/javascript" language="javascript" src="{% static 'assets/vendors/bootstrap/bootstrap.min.js' %}"></script>
+
+    <!--Dashboard number counter settings goes here-->
+
+</body>
+
+</html>
+

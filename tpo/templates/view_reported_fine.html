@@ -1,0 +1,169 @@
+{% load static %}
+<!--<?php-->
+<!--include "../connection.php";	-->
+<!--session_start();-->
+<!--if (isset($_SESSION['police_id']) && isset($_SESSION['officer_email']) && isset($_SESSION['officer_name']) && isset($_SESSION['police_station']) && isset($_SESSION['court'])) {-->
+<!--?>-->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Reported Fine | Traffic Police Officer</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+</head>
+
+
+<body class="overlay-scrollbar">
+
+    <!--Top navigation bar includes goes here-->
+   {% include 'includes/topNav.html' %}
+
+
+    <!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+    <!-- Left sidebar navigation start here =============================================-->
+    <div class="leftsidebar overlay-scrollbar scrollbar-hover">
+        <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+            <!--Left sidebar navigation items-->
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_dashboard' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'add_new_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <span>Add New Fine</span>
+                </a>
+            </li>
+
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'check_revenue_license' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span>Revenue License</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'view_reported_fine' pid %}" class="leftsidebar-nav-link active">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>View Reported Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_profile' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'profile_details' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_reported_issues' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Reported Issues</span>
+            </a>
+        </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'tpo_logout' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>Logout</span>
+                </a>
+            </li>
+            <!--Left sidebar navigation items-->
+        </ul>
+    </div>
+    <!-- Left sidebar navigation end here ========================================-->
+
+
+    <!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+    <!-- Dashboard main content start here =================================================-->
+    <div class="dashwrapper">
+            <div class="container-fluid">
+                <h1 class="mt-4">View Reported Fine</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active">View Reported Fine</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i> You can sort data here
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <!--View all drivers table includes goes here-->
+                                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Reference No</th>
+            <th>Driving License No</th>
+            <th>Provision</th>
+            <th>Vehicle No</th>
+            <th>Total Amount</th>
+            <th>Issue Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for r in reports %}
+        <tr>
+            <td>{{r.ref_no}}</td>
+            <td>{{r.license_id}}</td>
+            <td>{{r.provision}}</td>
+            <td>{{r.vehicle_no}}</td>
+            <td>{{r.total_amount}}</td>
+            <td>{{r.issued_date}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Dashboard main content end here ========================================-->
+
+    
+    <!--Javascripts includes goes here-->
+     {% include 'includes/footer.html' %}
+
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/bootstrap/bootstrap.min.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/DataTables/02_TPO_ViewReportedFine.js"></script>
+
+</body>
+
+</html>
+<!--<?php-->
+<!--}else{ -->
+<!--	header("Location: index.php");-->
+<!--	exit();-->
+<!--}-->
+<!--?>-->
+

@@ -1,0 +1,196 @@
+{% load static %}
+<!--<?php-->
+<!--session_start();-->
+<!--if (isset($_SESSION['police_id']) && isset($_SESSION['officer_email']) && isset($_SESSION['officer_name']) && isset($_SESSION['police_station']) && isset($_SESSION['court'])) {-->
+
+<!--?>-->
+<!--<?php-->
+<!-- -->
+<!--include("../connection.php");-->
+<!--$owner= $_SESSION['police_id'];-->
+<!--$sql = "SELECT * FROM tpo WHERE police_id = '$owner'";-->
+<!--$res = mysqli_query($conn, $sql);-->
+<!--?>-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile Details | Traffic Police Officer</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+    <!--Top navigation bar includes goes here-->
+    {% include 'includes/topNav.html' %}
+
+
+    <!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+    <!-- Left sidebar navigation start here =============================================-->
+    <div class="leftsidebar overlay-scrollbar scrollbar-hover">
+        <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+            <!--Left sidebar navigation items-->
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_dashboard' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'add_new_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <span>Add New Fine</span>
+                </a>
+            </li>
+
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'check_revenue_license' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span>Revenue License</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'view_reported_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>View Reported Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_profile' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'profile_details' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_reported_issues' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Reported Issues</span>
+            </a>
+        </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'tpo_logout' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>Logout</span>
+                </a>
+            </li>
+            <!--Left sidebar navigation items-->
+        </ul>
+    </div>
+    <!-- Left sidebar navigation end here ========================================-->
+
+
+    <!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+    <!-- Dashboard main content start here =================================================-->
+    <div class="dashwrapper">
+            <div class="container-fluid">
+            <h1 class="mt-4">Account Holder Details</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Profile Details</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-user"></i> Police Officer All Details
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <!--View all drivers table includes goes here-->
+                            <div class="card-body">
+<!--                            <?php while($row = mysqli_fetch_array($res)){-->
+<!--                            ?>-->
+                            <form action="" method="POST">
+                            <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="reference_no">Police ID</label>
+                                <input type="text" class="form-control" id="reference_no" value="{{p.police_id}}" disabled placeholder="Officer ID" disabled>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="vehicle_no">Office Name</label>
+                                <input type="text" class="form-control" id="vehicle_no" placeholder="Officer Name" value="{{p.officer_name}}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="license_duration">Email</label>
+                                <input type="text" class="form-control" id="vehicle_type" placeholder="Officer Email" value="{{p.officer_email}}" disabled>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="vehicle_owner">Police Station</label>
+                                <input type="text" class="form-control" id="fuel_type" placeholder="Police Station" value="{{p.police_station}}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="payment_type">Court</label>
+                                <input type="text" class="form-control" id="owner_name" placeholder="Court" value="{{p.court}}" disabled>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="amount">Registered Date</label>
+                                <input type="text" class="form-control" id="owner_address" placeholder="Registered Date" value="{{p.registered_at}}" disabled>
+                            </div>
+                        </div>
+                                </form>
+<!--                                <?php-->
+<!--                                }?>-->
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Dashboard main content end here ========================================-->
+
+
+    <!--Javascripts includes goes here-->
+   {% include 'includes/footer.html' %}
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/bootstrap/bootstrap.min.js"></script>
+    <script>
+    	//To close the success & error alert with slide up animation
+	$("#success-alert").delay(4000).fadeTo(2000, 500).slideUp(1000, function(){
+    	$("#success-alert").slideUp(1000);
+	});
+    </script>
+
+
+
+</body>
+
+</html>
+<!--<?php-->
+<!--}else{ -->
+<!--	header("Location: index.php");-->
+<!--	exit();-->
+<!--}-->
+<!--?>-->
+

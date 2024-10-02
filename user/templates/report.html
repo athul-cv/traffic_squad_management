@@ -1,0 +1,260 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard | Driver</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f2f2f2;
+        }
+        .container {
+          max-width: 600px;
+          margin: 50px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          text-align: center;
+        }
+        form {
+          margin-top: 20px;
+        }
+        label {
+          display: block;
+          margin-bottom: 8px;
+        }
+        input[type="text"],
+        textarea,select {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+        input[type="file"] {
+          margin-top: 10px;
+        }
+        input[type="submit"]{
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        input[type="reset"] {
+          background-color: red;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        input[type="submit"]:hover {
+          background-color: #45a049;
+        }
+    </style>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+<!--Top navigation bar includes goes here-->
+{% include 'includes/topNav.html' %}
+
+
+<!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+<!-- Left sidebar navigation start here =============================================-->
+<div class="leftsidebar overlay-scrollbar scrollbar-hover">
+    <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+        <!--Left sidebar navigation items-->
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_dashboard' %}" class="leftsidebar-nav-link active">
+                <div>
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_pending_fine' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <span>Driver's Pending Fine</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_paid_fine' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-coins"></i>
+                </div>
+                <span>Driver's Paid Fine</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_fine_tickets' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Provision Details</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_report' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Report an Issue</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_profile' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_profile_details' lic %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Profile Details</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_logout' %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Logout</span>
+            </a>
+        </li>
+        <!--Left sidebar navigation items-->
+    </ul>
+</div>
+<!-- Left sidebar navigation end here ============================================-->
+
+
+<!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+<!-- Dashboard main content start here =================================================-->
+<div class="dashwrapper animated fadeIn">
+    <div class="container-fluid">
+
+        <h1>Accident Reporting Form</h1>
+        {% if messages %}
+                {% for m in messages %}
+                {% if m.tags == 'error' %}
+                    <div class="alert alert-danger" id="success-alert">
+						<i class="fas fa-exclamation-circle"></i>
+						{{m}}
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+					</div>
+                {% elif m.tags == 'success' %}
+
+						<div class="alert alert-success" id="success-alert">
+						<i class="fas fa-check-circle"></i>
+						{{m}}
+  						<button type="button" class="close" data-dismiss="alert">&times;</button>
+					</div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="accident_type">Accident Type:</label>
+            <!--      <input type="text" id="accident_type" name="accident_type" required>-->
+            <select name="accident_type" id="accident_type" required>
+                <option selected disabled> Please Select the Accident Type</option>
+                <option value="Collisions involving Pedestrain or Cyclist"
+                        title="Accidents involving pedestrians or cyclists can occur when vehicles fail to yield to pedestrians at crosswalks, or when cyclists are hit by vehicles while riding on the road.">
+                    Collisions involving Pedestrain or Cyclist
+                </option>
+                <option value="Head-on collisions"
+                        title="This type of accident happens when two vehicles traveling in opposite directions collide front-to-front. Head-on collisions often result in severe injuries and fatalities, especially at high speeds.">
+                    Head-on collisions
+                </option>
+                <option value="Hit-and-Run Accidents"
+                        title=" In these accidents, a driver involved in a collision leaves the scene without stopping to provide assistance or exchange information. Hit-and-run accidents can involve any of the above types of collisions.">
+                    Hit-and-Run Accidents
+                </option>
+                <option value="Multi-Vehicle Collision"
+                        title="These accidents involve three or more vehicles colliding with each other in a series of impacts. Multi-vehicle pileups often occur on highways during adverse weather conditions or due to reduced visibility.">
+                    Multi-Vehicle Collision
+                </option>
+                <option value="Rear-end Collisions"
+                        title="These occur when one vehicle crashes into the rear of the vehicle in front of it. This type of accident often happens due to tailgating, distracted driving, or sudden braking.">
+                    Rear-end Collisions
+                </option>
+                <option value="Rollover Accidents"
+                        title="These accidents occur when a vehicle tips over onto its side or roof. Rollovers can happen during high-speed maneuvers, collisions, or when a vehicle's center of gravity is shifted suddenly.">
+                    Rollover Accidents
+                </option>
+                <option value="Run-off-road Accidents"
+                        title="These accidents happen when a vehicle veers off the roadway and crashes into objects like trees, ditches, or embankments. Run-off-road accidents can occur due to driver fatigue, distraction, or loss of control.">
+                    Run-off-road Accidents
+                </option>
+                <option value="Side-impact Collision"
+                        title="These occur when the front of one vehicle crashes into the side of another vehicle, forming a 'T' shape. Intersection accidents are common examples of side-impact collisions.">
+                    Side-impact Collision
+                </option>
+                <option value="Single-Vehicle Accidents"
+                        title="These accidents involve only one vehicle and can include collisions with fixed objects like trees, utility poles, or barriers, as well as rollovers due to loss of control.">
+                    Single-Vehicle Accidents
+                </option>
+                <option value="Others" title="Other Issues">Others</option>
+            </select>
+
+            <label for="accident_description">Accident Description:</label>
+            <textarea id="accident_description" name="accident_description" rows="4" required></textarea>
+
+            <label for="accident_location">Accident Location:</label>
+            <input type="text" id="accident_location" name="accident_location" required>
+
+            <label for="accident_date">Date of Accident:</label>
+            <input type="date" id="accident_date" name="accident_date" required>
+
+            <label for="accident_time">Time of Accident:</label>
+            <input type="time" id="accident_time" name="accident_time" required>
+
+            <label for="accident_image">Upload Image:</label>
+            <input type="file" id="accident_image" name="accident_image" accept="image/*" required><br><br>
+<div style="text-align:center">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Cancel">
+</div>
+        </form>
+
+    </div>
+</div>
+
+
+
+<!--Javascripts includes goes here-->
+{% include 'includes/footer.html' %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript" language="javascript" src="{% static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+
+
+
+

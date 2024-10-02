@@ -1,0 +1,189 @@
+{% load static %}
+<!--<?php-->
+<!--session_start();-->
+<!--if (isset($_SESSION['police_id']) && isset($_SESSION['officer_email']) && isset($_SESSION['officer_name']) && isset($_SESSION['police_station']) && isset($_SESSION['court'])) {-->
+
+<!--?>-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Driver's Past Fine | Traffic Police Officer</title>
+
+    <!--Elements inside the head tag includes goes here-->
+     {% include 'includes/header.html' %}
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+    <!--Top navigation bar includes goes here-->
+   {% include 'includes/topNav.html' %}
+
+
+    <!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+    <!-- Left sidebar navigation start here =============================================-->
+    <div class="leftsidebar overlay-scrollbar scrollbar-hover">
+        <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+            <!--Left sidebar navigation items-->
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_dashboard' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'add_new_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <span>Add New Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'drivers_past_fine' pid %}" class="leftsidebar-nav-link active">
+                    <div>
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <span>Driver's Past Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'check_revenue_license' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span>Revenue License</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'view_reported_fine' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>View Reported Fine</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'police_profile' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'profile_details' pid %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Profile Details</span>
+                </a>
+            </li>
+            <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_reported_issues' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Reported Issues</span>
+            </a>
+        </li>
+            <li class="leftsidebar-nav-item">
+                <a href="{% url 'tpo_logout' %}" class="leftsidebar-nav-link">
+                    <div>
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <span>Logout</span>
+                </a>
+            </li>
+            <!--Left sidebar navigation items-->
+        </ul>
+    </div>
+    <!-- Left sidebar navigation end here ========================================-->
+
+
+    <!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+    <!-- Dashboard main content start here =================================================-->
+    <div class="dashwrapper">
+            <div class="container-fluid">
+                <h1 class="mt-4">Driver's Past Fine</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Driver's Past Fine</li>
+                </ol>
+<div class="card mt-5 mb-4">
+    <div class="card-header">
+        <i class="fas fa-history"></i> Search Driver Past Fines
+    </div>
+    <div class="card-body mobilePaading">
+        <form action="" method="POST">
+            <div class="form-row">
+                <div class="form-group col-xs-9">
+                    <input type="text" class="form-control" id="license_id" name="licenseid" placeholder="Driving License No">
+                </div>
+                <div class="form-group col-xs-3">
+                    <button type="submit" name="search" class="btn btn-primary mb-2" name="search"><i class="fas fa-search"></i> Check</button>
+                </div>
+            </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Refferance No</th>
+                                    <th>Provision</th>
+                                    <th>Vehicle No</th>
+                                    <th>Place</th>
+                                    <th>Issue Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+<!--                            <?php-->
+<!--                            if (isset($_POST['search']))-->
+<!--                            {-->
+<!--	                                $dlno=$_POST['licenseid'];-->
+<!--                                    include "../connection.php";-->
+<!--                                    $sql=mysqli_query($conn,"SELECT * FROM issued_fines WHERE license_id = '$dlno'");-->
+<!--                                    while($res=mysqli_fetch_assoc($sql))-->
+<!--                                    {-->
+<!--                                    ?>-->
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+<!--                                    <?php 	-->
+<!--                                    }}?>-->
+                            </tbody>
+                        </table>
+                    </div>
+        </form>
+    </div>
+</div>
+    </div>
+    <!-- Dashboard main content end here ========================================-->
+
+
+    <!--Javascripts includes goes here-->
+   {% include 'includes/footer.html' %}
+
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/bootstrap/bootstrap.min.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../assets/vendors/DataTables/02_TPO_ViewReportedFine.js"></script>
+
+
+</body>
+
+</html>
+
+

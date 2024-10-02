@@ -1,0 +1,156 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard | Traffic Police Officer</title>
+
+    <!--Elements inside the head tag includes goes here-->
+    {% include 'includes/header.html' %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome CSS -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <style>
+        .accident-card {
+          margin-bottom: 20px;
+        }
+        .accident-image {
+          max-height: 200px;
+          object-fit: cover;
+        }
+      </style>
+
+</head>
+
+
+<body class="overlay-scrollbar">
+
+<!--Top navigation bar includes goes here-->
+{% include 'includes/topNav.html' %}
+
+
+<!--==================================================================================================================================SECTION_02====================================================================================================================================-->
+
+<!-- Left sidebar navigation start here =============================================-->
+<div class="leftsidebar overlay-scrollbar scrollbar-hover">
+    <ul class="leftsidebar-nav overlay-scrollbar scrollbar-hover">
+        <!--Left sidebar navigation items-->
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'police_dashboard' pid %}" class="leftsidebar-nav-link active">
+                <div>
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'add_new_fine' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+                <span>Add New Fine</span>
+            </a>
+        </li>
+
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'check_revenue_license' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <span>Revenue License</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'view_reported_fine' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <span>View Reported Fine</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'police_profile' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'profile_details' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Profile Details</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'user_reported_issues' pid %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span>Reported Issues</span>
+            </a>
+        </li>
+        <li class="leftsidebar-nav-item">
+            <a href="{% url 'tpo_logout' %}" class="leftsidebar-nav-link">
+                <div>
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <span>Logout</span>
+            </a>
+        </li>
+        <!--Left sidebar navigation items-->
+    </ul>
+</div>
+<!-- Left sidebar navigation end here ========================================-->
+
+
+<!--==================================================================================================================================SECTION_03====================================================================================================================================-->
+
+<!-- Dashboard main content start here =================================================-->
+<div class="dashwrapper animated fadeIn">
+    <div class="container-fluid">
+        <!--<div class="container mt-5">-->
+        <h1 class="mb-4 text-center">Reported Accidents</h1>
+        <div class="row">
+            {% if report %}
+            {% for r in report %}
+            <!-- Accident Card -->
+            <div class="col-md-6">
+                <div class="card accident-card">
+                    <img src="{{ r.accident_image.url }}" class="card-img-top accident-image" alt="Accident Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Accident Type: {{ r.accident_type }}</h5>
+                        <p class="card-text">Accident Description: {{ r.accident_desc }}</p>
+                        <p class="card-text">Accident Location: {{ r.accident_loc }}</p>
+                        <p class="card-text">Date: {{ r.accident_date }}</p>
+                        <p class="card-text">Time: {{ r.accident_time }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Accident Card -->
+            {% endfor %}
+            {% else %}
+            <p class="alert alert-success" style="margin-left:610px;margin-top:50px;">No Recent Accidents Reported</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Dashboard main content end here ========================================-->
+
+
+<!--Javascripts includes goes here-->
+{% include 'includes/footer.html' %}
+
+<script type="text/javascript" language="javascript"
+        src="{% static 'assets/vendors/bootstrap/bootstrap.min.js' %}"></script>
+
+<!--Dashboard number counter settings goes here-->
+
+</body>
+
+</html>
+
